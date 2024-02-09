@@ -5,14 +5,21 @@
 
 <h4>Machine: @Model.Name</h4>
 
-@using (Html.BeginForm())
+@if (((SelectList)ViewBag.EngineerId).Count() == 0)
 {
-    @Html.HiddenFor(model => model.MachineId)
+    <p>No engineers have been hired. Go to this @Html.ActionLink("this page", "Create", "Engineers") to add an Engineer.</p>
+}
+else
+{
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.MachineId)
 
-    @Html.Label("Select an engineer")
-    @Html.DropDownList("EngineerId")
+        @Html.Label("Select an engineer")
+        @Html.DropDownList("EngineerId")
 
-    <input class="button" type="submit" value="Add engineer" />
+        <input class="button" type="submit" value="Add engineer" />
+    }
 }
 
 <p>@Html.ActionLink("Back to machine list", "Index")</p>
