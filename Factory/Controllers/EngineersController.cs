@@ -52,4 +52,27 @@ public class EngineersController : Controller
         Engineer eng = _db.Engineers.FirstOrDefault(e => e.EngineerId == id);
         return View(eng);
     }
+
+    [HttpPost]
+    public ActionResult Edit(Engineer eng)
+    {
+        _db.Engineers.Update(eng);
+        _db.SaveChanges();
+        return RedirectToAction("Details", new { id = eng.EngineerId });
+    }
+
+    public ActionResult Delete(int id)
+    {
+        Engineer eng = _db.Engineers.FirstOrDefault(e => e.EngineerId == id);
+        return View(eng);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+        Engineer eng = _db.Engineers.FirstOrDefault(e => e.EngineerId == id);
+        _db.Engineers.Remove(eng);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+    }
 }
