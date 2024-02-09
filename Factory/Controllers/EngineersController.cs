@@ -95,4 +95,14 @@ public class EngineersController : Controller
         }
         return RedirectToAction("Details", new { id = eng.EngineerId });
     }
+
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId, int engId)
+    {
+        EngineerMachine joinEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
+        _db.EngineerMachines.Remove(joinEntry);
+        _db.SaveChanges();
+
+        return RedirectToAction("Details", new { id = engId });
+    }
 }

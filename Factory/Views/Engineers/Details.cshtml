@@ -16,6 +16,12 @@ else
         @foreach (EngineerMachine join in Model.JoinEntities)
         {
             <li>@join.Machine.Name</li>
+            @using (Html.BeginForm("DeleteJoin", "Engineers"))
+            {
+                @Html.Hidden("joinId", @join.EngineerMachineId)
+                @Html.Hidden("engId", @Model.EngineerId)
+                <input type="submit" value="Remove license" />
+            }
         }
     </ul>
 }
