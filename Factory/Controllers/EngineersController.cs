@@ -75,4 +75,24 @@ public class EngineersController : Controller
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
+
+    public ActionResult AddMachine(int id)
+    {
+        Engineer eng = _db.Engineers.FirstOrDefault(e => e.EngineerId == id);
+        ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
+        return View(eng);
+    }
+
+    [HttpPost]
+    public ActionResult AddMachine(Engineer eng, int machineId)
+    {
+        EngineerMachine joinEntity = _db.EngineerMachines
+            .FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == eng.EngineerId));
+        if (joinEntity == null && machineId != 0)
+        {
+            _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = eng.EngineerId });
+            _db.SaveChanges();
+        }
+        return RedirectToAction("Details", new { id = eng.EngineerId });
+    }
 }
