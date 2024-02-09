@@ -1,0 +1,26 @@
+@using Factory.Models
+@model Factory.Models.Machine
+
+<h2>Profile</h2>
+<h3>Machine: @Model.Name</h3>
+<h4>@Model.Purpose</h4>
+
+@if (@Model.JoinEntities.Count == 0)
+{
+    <p>There are no engineers licensed to repair @Model.Name.</p>
+}
+else
+{
+    <h3>Repair Engineers:</h3>
+    <ul>
+        @foreach (EngineerMachine join in Model.JoinEntities)
+        {
+            <li>@join.Engineer.Name</li>
+        }
+    </ul>
+}
+
+@Html.ActionLink("Add a licensed engineer", "AddEngineer", new { id = Model.MachineId }) |
+@Html.ActionLink("Update machine info", "Edit", new { id = Model.MachineId }) |
+@Html.ActionLink("Decommission machine", "Delete", new { id = Model.MachineId }) |
+@Html.ActionLink("Back to machine list", "Index")

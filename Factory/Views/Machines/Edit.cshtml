@@ -1,0 +1,15 @@
+@model Factory.Models.Machine
+
+<h2>Update info for @Model.Name</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.MachineId)
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+    @Html.LabelFor(model => model.Purpose)
+    @Html.EditorFor(model => model.Purpose)
+    <input type="submit" value="Update" />
+}
+
+@Html.ActionLink("Back to machine list", "Index")

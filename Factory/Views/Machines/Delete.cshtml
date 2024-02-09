@@ -1,0 +1,13 @@
+@model Factory.Models.Machine
+
+<h2>Are you sure you want to decommission @Model.Name?</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Yes, decommission" class="btn btn-danger" />
+}
+
+@using (Html.BeginForm("Details", "Machines", new { id = Model.MachineId }))
+{
+    <input type="submit" value="Nevermind" class="btn btn-success" />
+}
