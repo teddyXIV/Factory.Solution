@@ -107,4 +107,15 @@ public class EngineersController : Controller
 
         return RedirectToAction("Details", new { id = engId });
     }
+
+    [HttpPost]
+    public ActionResult Reassign(int id, string newAssign)
+    {
+        Engineer eng = _db.Engineers.FirstOrDefault(e => e.EngineerId == id);
+        eng.Assignment = newAssign;
+        _db.Engineers.Update(eng);
+        _db.SaveChanges();
+        return RedirectToAction("Details", new { id });
+
+    }
 }

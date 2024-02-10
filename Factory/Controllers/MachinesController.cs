@@ -115,7 +115,7 @@ public class MachinesController : Controller
         mach.Status = newStatus;
         _db.Machines.Update(mach);
         _db.SaveChanges();
-        return RedirectToAction("Details", new { id = id });
+        return RedirectToAction("Details", new { id });
 
     }
 }

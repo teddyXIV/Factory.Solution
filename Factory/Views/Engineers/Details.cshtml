@@ -6,17 +6,17 @@
 <h4>@Model.Specialty</h4>
 <h4>Repair assignment: @Model.Assignment</h4>
 
-@using (Html.BeginForm())
+@* @using (Html.BeginForm())
 {
-    @Html.RadioButton("assignment", "Unassigned", true, new { id = "unassign-radio" })
-    <label for="unassign-radio">Unassigned</label>
+@Html.RadioButton("assignment", "Unassigned", true, new { id = "unassign-radio" })
+<label for="unassign-radio">Unassigned</label>
 
-    @foreach (EngineerMachine join in Model.JoinEntities)
-    {
-        @Html.RadioButton("assignment", @join.Machine.Name, new { id = $"{join.Machine.Name}-radio" })
-        <label for="@($"{join.Machine.Name}-radio")">@join.Machine.Name</label>
-    }
+@foreach (EngineerMachine join in Model.JoinEntities)
+{
+@Html.RadioButton("assignment", @join.Machine.Name, new { id = $"{join.Machine.Name}-radio" })
+<label for="@($"{join.Machine.Name}-radio")">@join.Machine.Name</label>
 }
+} *@
 
 @if (@Model.JoinEntities.Count == 0)
 {
@@ -24,6 +24,21 @@
 }
 else
 {
+    @using (Html.BeginForm("Reassign", "Engineers"))
+    {
+        @Html.Hidden("id", @Model.EngineerId)
+
+        @Html.RadioButton("newAssign", "Unassigned", true, new { id = "unassign-radio" })
+        <label for="unassign-radio">Unassigned</label>
+
+        @foreach (EngineerMachine join in Model.JoinEntities)
+        {
+            @Html.RadioButton("newAssign", $"{join.Machine.Name}", new { id = $"{join.Machine.Name}-radio" })
+            <label for="@($"{join.Machine.Name}-radio")">@join.Machine.Name</label>
+
+            <input type="submit" value="Reassign" />
+        }
+    }
     <h3>Repair Licenses:</h3>
     <ul>
         @foreach (EngineerMachine join in Model.JoinEntities)
