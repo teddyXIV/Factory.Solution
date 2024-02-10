@@ -3,11 +3,28 @@
 
 <h2>Profile</h2>
 <h3>Machine: @Model.Name</h3>
-<h4>@Model.Purpose</h4>
+<h4>@Model.Function</h4>
+<h4>@Model.Status</h4>
+
+@using (Html.BeginForm("UpdateStatus", "Machines"))
+{
+    @Html.Hidden("id", @Model.MachineId)
+
+    @Html.RadioButton("newStatus", "Functioning normally", true, new { id = "func-radio" })
+    <label for="func-radio">Functioning normally</label>
+
+    @Html.RadioButton("newStatus", "Malfunctioning", new { id = "malfunc-radio" })
+    <label for="malfunc-radio">Malfunctioning</label>
+
+    @Html.RadioButton("newStatus", "Undergoing repairs", new { id = "repair-radio" })
+    <label for="repair-radio">Undergoing repairs</label>
+
+    <input type="submit" value="Update status" />
+}
 
 @if (@Model.JoinEntities.Count == 0)
 {
-    <p>There are no engineers licensed to repair @Model.Name.</p>
+    <p>There are no engineers licensed to repair the @Model.Name.</p>
 }
 else
 {

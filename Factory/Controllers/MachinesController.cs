@@ -107,4 +107,15 @@ public class MachinesController : Controller
 
         return RedirectToAction("Details", new { id = machId });
     }
+
+    [HttpPost]
+    public ActionResult UpdateStatus(int id, string newStatus)
+    {
+        Machine mach = _db.Machines.FirstOrDefault(m => m.MachineId == id);
+        mach.Status = newStatus;
+        _db.Machines.Update(mach);
+        _db.SaveChanges();
+        return RedirectToAction("Details", new { id = id });
+
+    }
 }
