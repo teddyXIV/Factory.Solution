@@ -9,6 +9,7 @@ public class Machine
     [Required(ErrorMessage = "You must provide a machine function.")]
     public string Function { get; set; }
     public string Status { get; set; } = "Functioning normally";
+    [DataType(DataType.Date)]
     public List<Inspection> Inspections { get; set; }
     public List<EngineerMachine> JoinEntities { get; }
 }

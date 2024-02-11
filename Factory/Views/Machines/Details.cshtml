@@ -1,76 +1,92 @@
 @using Factory.Models
 @model Factory.Models.Machine
 
-<h2>Machine: @Model.Name</h2>
-<h4>@Model.Function</h4>
-<h4>@Model.Status</h4>
+<div class=content>
+    <div class=details>
+        @Html.ActionLink("Back to machine list", "Index")
+        <h2>Machine: @Model.Name</h2>
+        @Html.ActionLink("Update machine info", "Edit", new { id = Model.MachineId }) |
+        @Html.ActionLink("Decommission machine", "Delete", new { id = Model.MachineId })
+        <h4>Function: @Model.Function</h4>
+        <h4>@Model.Status</h4>
 
-@using (Html.BeginForm("UpdateStatus", "Machines"))
-{
-    @Html.Hidden("id", @Model.MachineId)
-
-    @Html.RadioButton("newStatus", "Functioning normally", true, new { id = "func-radio" })
-    <label for="func-radio">Functioning normally</label>
-
-    @Html.RadioButton("newStatus", "Malfunctioning", new { id = "malfunc-radio" })
-    <label for="malfunc-radio">Malfunctioning</label>
-
-    @Html.RadioButton("newStatus", "Undergoing repairs", new { id = "repair-radio" })
-    <label for="repair-radio">Undergoing repairs</label>
-
-    <input type="submit" value="Update status" />
-}
-
-@if (@Model.JoinEntities.Count == 0)
-{
-    <p>There are no engineers licensed to repair the @Model.Name.</p>
-}
-else
-{
-    <h3>Repair Engineers:</h3>
-    <ul>
-        @foreach (EngineerMachine join in Model.JoinEntities)
+        @using (Html.BeginForm("UpdateStatus", "Machines"))
         {
-            <li>@join.Engineer.Name</li>
-            @using (Html.BeginForm("DeleteJoin", "Engineers"))
+            <div class=alt-form>
+                @Html.Hidden("id", @Model.MachineId)
+                <div class=radio-entry>
+                    @Html.RadioButton("newStatus", "Functioning normally", true, new { id = "func-radio" })
+                    <label for="func-radio">Functioning normally</label>
+                </div>
+                <div class=radio-entry>
+                    @Html.RadioButton("newStatus", "Malfunctioning", new { id = "malfunc-radio" })
+                    <label for="malfunc-radio">Malfunctioning</label>
+                </div>
+                <div class=radioentry>
+                    @Html.RadioButton("newStatus", "Undergoing repairs", new { id = "repair-radio" })
+                    <label for="repair-radio">Undergoing repairs</label>
+                </div>
+                <input class="form-button" type="submit" value="Update status" />
+            </div>
+        }
+
+        @if (@Model.JoinEntities.Count == 0)
+        {
+            <p>There are no engineers licensed to repair the @Model.Name.</p>
+        }
+        else
+        {
+            <h3>Licensed engineers:</h3>
+            <ul>
+                @foreach (EngineerMachine join in Model.JoinEntities)
+                {
+                    <div class="mach-eng">
+                        <li>@join.Engineer.Name |</li>
+                        @using (Html.BeginForm("DeleteJoin", "Engineers"))
+                        {
+                            @Html.Hidden("joinId", @join.EngineerMachineId)
+                            @Html.Hidden("engId", @Model.MachineId)
+
+                            <input class="remove" type="submit" value="Remove engineer" />
+                        }
+                    </div>
+                }
+            </ul>
+        }
+        @Html.ActionLink("Add a licensed engineer", "AddEngineer", new { id = Model.MachineId })
+    </div>
+
+    <div class=inspec-log>
+
+        <h3>Inspection Log</h3>
+
+
+        @if (@Model.Inspections.Count == 0)
+        {
+            <p>This machine has not been insepcted.</p>
+        }
+        else
+        {
+            @foreach (Inspection inspec in Model.Inspections)
             {
-                @Html.Hidden("joinId", @join.EngineerMachineId)
-                @Html.Hidden("engId", @Model.MachineId)
-                <input type="submit" value="Remove engineer" />
+                <li>Date: @inspec.Date.ToString("yyyy-MM-dd") | Engineer: @inspec.Inspector</li>
             }
         }
-    </ul>
-}
 
-<h3>Inspections</h3>
+        <h3>Record Inspection: </h3>
 
+        @using (Html.BeginForm("Create", "Inspections"))
+        {
+            <div class=form-layout>
+                @Html.Hidden("MachineId", @Model.MachineId)
+                @Html.Label("Date", "Date")
+                @Html.Editor("Date", new { htmlAttributes = new { @type = "date" } })
+                @Html.Label("Inspector", "Inspector")
+                @Html.DropDownList("Inspector", ViewBag.EngineerName as SelectList)
 
-@if (@Model.Inspections.Count == 0)
-{
-    <p>This machine has not been insepcted.</p>
-}
-else
-{
-    @foreach (Inspection inspec in Model.Inspections)
-    {
-        <li>Date: @inspec.Date | Engineer: @inspec.Inspector</li>
-    }
-}
+                <input class="form-button" type="submit" value="Add inspection" />
+            </div>
+        }
+    </div>
 
-<h3>Record Inspection: </h3>
-
-@using (Html.BeginForm("Create", "Inspections"))
-{
-    @Html.Hidden("MachineId", @Model.MachineId)
-    @Html.Label("Date", "Date")
-    @Html.Editor("Date", new { htmlAttributes = new { @type = "date" } })
-    @Html.Label("Inspector", "Inspector")
-    @Html.DropDownList("Inspector", ViewBag.EngineerName as SelectList)
-
-    <input type="submit" value="Add inspection" />
-}
-
-@Html.ActionLink("Add a licensed engineer", "AddEngineer", new { id = Model.MachineId }) |
-@Html.ActionLink("Update machine info", "Edit", new { id = Model.MachineId }) |
-@Html.ActionLink("Decommission machine", "Delete", new { id = Model.MachineId }) |
-@Html.ActionLink("Back to machine list", "Index")
+</div>
