@@ -3,6 +3,7 @@ using System;
 using Factory.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Factory.Migrations
 {
     [DbContext(typeof(FactoryContext))]
-    partial class FactoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240210224030_AddInpectionTable")]
+    partial class AddInpectionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,29 +64,6 @@ namespace Factory.Migrations
                     b.ToTable("EngineerMachines");
                 });
 
-            modelBuilder.Entity("Factory.Models.Inspection", b =>
-                {
-                    b.Property<int>("InspectionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Inspector")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("MachineId")
-                        .HasColumnType("int");
-
-                    b.HasKey("InspectionId");
-
-                    b.HasIndex("MachineId");
-
-                    b.ToTable("Inspections");
-                });
-
             modelBuilder.Entity("Factory.Models.Machine", b =>
                 {
                     b.Property<int>("MachineId")
@@ -107,6 +86,29 @@ namespace Factory.Migrations
                     b.ToTable("Machines");
                 });
 
+            modelBuilder.Entity("Factroy.Models.Inspection", b =>
+                {
+                    b.Property<int>("InspectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Inspector")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MachineId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InspectionId");
+
+                    b.HasIndex("MachineId");
+
+                    b.ToTable("Inspection");
+                });
+
             modelBuilder.Entity("Factory.Models.EngineerMachine", b =>
                 {
                     b.HasOne("Factory.Models.Engineer", "Engineer")
@@ -126,7 +128,7 @@ namespace Factory.Migrations
                     b.Navigation("Machine");
                 });
 
-            modelBuilder.Entity("Factory.Models.Inspection", b =>
+            modelBuilder.Entity("Factroy.Models.Inspection", b =>
                 {
                     b.HasOne("Factory.Models.Machine", "Machine")
                         .WithMany("Inspections")

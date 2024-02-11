@@ -6,18 +6,6 @@
 <h4>@Model.Specialty</h4>
 <h4>Repair assignment: @Model.Assignment</h4>
 
-@* @using (Html.BeginForm())
-{
-@Html.RadioButton("assignment", "Unassigned", true, new { id = "unassign-radio" })
-<label for="unassign-radio">Unassigned</label>
-
-@foreach (EngineerMachine join in Model.JoinEntities)
-{
-@Html.RadioButton("assignment", @join.Machine.Name, new { id = $"{join.Machine.Name}-radio" })
-<label for="@($"{join.Machine.Name}-radio")">@join.Machine.Name</label>
-}
-} *@
-
 @if (@Model.JoinEntities.Count == 0)
 {
     <p>@Model.Name has not been licensed to repair any machines.</p>

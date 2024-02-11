@@ -42,6 +42,35 @@ else
     </ul>
 }
 
+<h3>Inspections</h3>
+
+@if (@Model.Inspections.Count == 0)
+{
+    <p>This machine has not been insepcted.</p>
+}
+else
+{
+    @foreach (Inspection inspec in Model.Inspections)
+    {
+        <li>Date: @inspec.Date | Engineer: @inspec.Inspector</li>
+    }
+}
+
+<h3>Record Inspection: </h3>
+
+@* <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+<p>@Html.ValidationMessageFor(model => model.Function, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p> *@
+
+@* @using (Html.BeginForm())
+{
+@Html.Label("Date", "Date")
+@Html.TextBox("Date", new { type = "date" })
+@Html.Label("Inspector", "Inspector")
+@Html.DropDownList("EngineerId")
+
+<input type="submit" value="Add machine" />
+} *@
+
 @Html.ActionLink("Add a licensed engineer", "AddEngineer", new { id = Model.MachineId }) |
 @Html.ActionLink("Update machine info", "Edit", new { id = Model.MachineId }) |
 @Html.ActionLink("Decommission machine", "Delete", new { id = Model.MachineId }) |

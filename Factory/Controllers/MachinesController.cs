@@ -44,6 +44,11 @@ public class MachinesController : Controller
             .Include(e => e.JoinEntities)
             .ThenInclude(join => join.Engineer)
             .FirstOrDefault(m => m.MachineId == id);
+
+        // List<int> engIds = _db.EngineerMachines.Select(em => em.EngineerId).Distinct().ToList();
+        // List<Engineer> engs = _db.Engineers.Where(e => engIds.Contains(e.EngineerId)).ToList();
+
+        // ViewBag.EngineerId = new SelectList(engs, "EngineerId", "Name");
         return View(mach);
     }
 
