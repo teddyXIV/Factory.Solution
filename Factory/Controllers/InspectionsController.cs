@@ -14,17 +14,11 @@ public class InspectionsController : Controller
     }
 
     [HttpPost]
-    public ActionResult Create(Inspection inspec)
+    public ActionResult Create(Inspection inspec, int id)
     {
-        if (!ModelState.IsValid)
-        {
-            return View();
-        }
-        else
-        {
-            _db.Inspections.Add(inspec);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        _db.Inspections.Add(inspec);
+        _db.SaveChanges();
+        return RedirectToAction("Details", "Machines", new { id = inspec.MachineId });
+
     }
 }

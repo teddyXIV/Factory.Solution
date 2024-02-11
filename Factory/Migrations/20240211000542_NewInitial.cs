@@ -4,7 +4,7 @@
 
 namespace Factory.Migrations
 {
-    public partial class TroubleshootingInspections : Migration
+    public partial class NewInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

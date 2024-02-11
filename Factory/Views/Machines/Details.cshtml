@@ -44,6 +44,7 @@ else
 
 <h3>Inspections</h3>
 
+
 @if (@Model.Inspections.Count == 0)
 {
     <p>This machine has not been insepcted.</p>
@@ -58,18 +59,16 @@ else
 
 <h3>Record Inspection: </h3>
 
-@* <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
-<p>@Html.ValidationMessageFor(model => model.Function, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p> *@
-
-@* @using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Inspections"))
 {
-@Html.Label("Date", "Date")
-@Html.TextBox("Date", new { type = "date" })
-@Html.Label("Inspector", "Inspector")
-@Html.DropDownList("EngineerId")
+    @Html.Hidden("MachineId", @Model.MachineId)
+    @Html.Label("Date", "Date")
+    @Html.Editor("Date", new { htmlAttributes = new { @type = "date" } })
+    @Html.Label("Inspector", "Inspector")
+    @Html.DropDownList("Inspector", ViewBag.EngineerName as SelectList)
 
-<input type="submit" value="Add machine" />
-} *@
+    <input type="submit" value="Add inspection" />
+}
 
 @Html.ActionLink("Add a licensed engineer", "AddEngineer", new { id = Model.MachineId }) |
 @Html.ActionLink("Update machine info", "Edit", new { id = Model.MachineId }) |

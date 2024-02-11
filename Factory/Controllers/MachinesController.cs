@@ -41,14 +41,15 @@ public class MachinesController : Controller
     public ActionResult Details(int id)
     {
         Machine mach = _db.Machines
-            .Include(e => e.JoinEntities)
+            .Include(m => m.Inspections)
+            .Include(m => m.JoinEntities)
             .ThenInclude(join => join.Engineer)
             .FirstOrDefault(m => m.MachineId == id);
 
-        // List<int> engIds = _db.EngineerMachines.Select(em => em.EngineerId).Distinct().ToList();
-        // List<Engineer> engs = _db.Engineers.Where(e => engIds.Contains(e.EngineerId)).ToList();
+        List<int> engIds = _db.EngineerMachines.Select(em => em.EngineerId).Distinct().ToList();
+        List<Engineer> engs = _db.Engineers.Where(e => engIds.Contains(e.EngineerId)).ToList();
 
-        // ViewBag.EngineerId = new SelectList(engs, "EngineerId", "Name");
+        ViewBag.EngineerName = new SelectList(engs, "Name", "Name");
         return View(mach);
     }
 
