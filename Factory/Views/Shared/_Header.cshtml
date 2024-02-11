@@ -1,1 +1,8 @@
-@Html.ActionLink("Home", "Index", "Home")
+<div class=navigation>
+    <a href="/">
+        <img src="~/images/asteroid_small_noback.png" alt="Small logo.">
+    </a>
+
+    @Html.ActionLink("View engineers", "Index", "Engineers", null, new { @class = "button" })
+    @Html.ActionLink("View machines", "Index", "Machines", null, new { @class = "button" })
+</div>
