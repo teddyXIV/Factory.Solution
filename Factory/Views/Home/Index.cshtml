@@ -1,1 +1,24 @@
-<img class="big-logo" src="~/images/asteroid_big_noback.png" alt="Big logo">
+@using Factory.Models
+
+<div class=content>
+    <div class=home-display>
+        <div class=total>
+            <h3>Engineers:</h3>
+            <h1>@Model["engs"].Length</h1>
+        </div>
+        <div class=total>
+            <h3>Machines:</h3>
+            <h1>@Model["machs"].Length</h1>
+        </div>
+        <div class=total>
+            <h3>Inspections:</h3>
+            <h1>@Model["inspecs"].Length</h1>
+        </div>
+        <div class=total>
+            <h3>Accidents:</h3>
+            <h1>@Model["accs"].Length</h1>
+        </div>
+    </div>
+
+    <img class="big-logo" src="~/images/asteroid_big_noback.png" alt="Big logo">
+</div>

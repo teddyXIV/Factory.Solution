@@ -8,6 +8,7 @@ public class FactoryContext : DbContext
     public DbSet<Engineer> Engineers { get; set; }
     public DbSet<Machine> Machines { get; set; }
     public DbSet<Inspection> Inspections { get; set; }
+    public DbSet<Accident> Accidents { get; set; }
     public DbSet<EngineerMachine> EngineerMachines { get; set; }
     public FactoryContext(DbContextOptions options) : base(options) { }
 }

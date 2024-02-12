@@ -56,7 +56,7 @@
         @Html.ActionLink("Add a licensed engineer", "AddEngineer", new { id = Model.MachineId })
     </div>
 
-    <div class=inspec-log>
+    <div class=event-log>
 
         <h3>Inspection Log</h3>
 
@@ -69,7 +69,7 @@
         {
             @foreach (Inspection inspec in Model.Inspections)
             {
-                <li>Date: @inspec.Date.ToString("yyyy-MM-dd") | Engineer: @inspec.Inspector</li>
+                <li>@inspec.Date.ToString("yyyy-MM-dd") | @inspec.Inspector</li>
             }
         }
 

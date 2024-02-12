@@ -1,7 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Factory.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Factory.Controllers;
 
@@ -14,7 +12,7 @@ public class InspectionsController : Controller
     }
 
     [HttpPost]
-    public ActionResult Create(Inspection inspec, int id)
+    public ActionResult Create(Inspection inspec)
     {
         _db.Inspections.Add(inspec);
         _db.SaveChanges();

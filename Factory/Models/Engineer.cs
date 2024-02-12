@@ -9,5 +9,6 @@ public class Engineer
     [Required(ErrorMessage = "You must provide an engineer specialty.")]
     public string Specialty { get; set; }
     public string Assignment { get; set; } = "Unassigned";
+    public List<Accident> Accidents { get; set; }
     public List<EngineerMachine> JoinEntities { get; }
 }

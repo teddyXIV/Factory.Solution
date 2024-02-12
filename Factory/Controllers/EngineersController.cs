@@ -41,6 +41,7 @@ public class EngineersController : Controller
     public ActionResult Details(int id)
     {
         Engineer eng = _db.Engineers
+            .Include(e => e.Accidents)
             .Include(e => e.JoinEntities)
             .ThenInclude(join => join.Machine)
             .FirstOrDefault(e => e.EngineerId == id);

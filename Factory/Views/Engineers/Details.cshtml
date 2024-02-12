@@ -52,7 +52,38 @@
             </ul>
         }
 
-        @Html.ActionLink("Add a repair license", "AddMachine", new { id = Model.EngineerId }) |
-        @Html.ActionLink("Back to engineer list", "Index")
+        @Html.ActionLink("Add a repair license", "AddMachine", new { id = Model.EngineerId })
+    </div>
+
+    <div class=event-log>
+
+        <h3>Accident Log</h3>
+
+
+        @if (@Model.Accidents.Count == 0)
+        {
+            <p>@Model.Name has had no safety incidents.</p>
+        }
+        else
+        {
+            @foreach (Accident acc in Model.Accidents)
+            {
+                <li>@acc.Date.ToString("yyyy-MM-dd") | @acc.Description</li>
+            }
+        }
+
+        <h3>Record an accident: </h3>
+        @using (Html.BeginForm("Create", "Accidents"))
+        {
+            <div class=form-layout>
+                @Html.Hidden("EngineerId", @Model.EngineerId)
+                @Html.Label("Date", "Date")
+                @Html.Editor("Date", new { htmlAttributes = new { @type = "date" } })
+                @Html.Label("Description", "Description")
+                @Html.TextBox("Description")
+
+                <input class="form-button" type="submit" value="Add accident" />
+            </div>
+        }
     </div>
 </div>
