@@ -1,15 +1,19 @@
 @model Factory.Models.Machine
 
-<h2>Update info for @Model.Name</h2>
+<div class=content>
+    <h2>Update info for @Model.Name</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.MachineId)
-    @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)
-    @Html.LabelFor(model => model.Function)
-    @Html.EditorFor(model => model.Function)
-    <input type="submit" value="Update" />
-}
+    @using (Html.BeginForm())
+    {
+        <div class=form-layout>
+            @Html.HiddenFor(model => model.MachineId)
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name)
+            @Html.LabelFor(model => model.Function)
+            @Html.EditorFor(model => model.Function)
+            <input class=form-button type="submit" value="Update" />
+        </div>
+    }
 
-@Html.ActionLink("Back to machine list", "Index")
+    @Html.ActionLink("Back to machine list", "Index")
+</div>

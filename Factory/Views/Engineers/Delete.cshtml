@@ -1,13 +1,15 @@
 @model Factory.Models.Engineer
 
-<h2>Are you sure you want to remove @Model.Name from the engineering staff?</h2>
+<div class=content>
+    <h2>Are you sure you want to remove @Model.Name from the engineering staff?</h2>
 
-@using (Html.BeginForm())
-{
-    <input type="submit" value="Yes, remove" class="btn btn-danger" />
-}
+    @using (Html.BeginForm())
+    {
+        <input class=delete type="submit" value="Yes, remove" />
+    }
 
-@using (Html.BeginForm("Details", "Engineers", new { id = Model.EngineerId }))
-{
-    <input type="submit" value="Nevermind" class="btn btn-success" />
-}
+    @using (Html.BeginForm("Details", "Engineers", new { id = Model.EngineerId }))
+    {
+        <input class=nvm type="submit" value="Nevermind" class="btn btn-success" />
+    }
+</div>

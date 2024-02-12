@@ -5,9 +5,9 @@
     <div class=details>
         @Html.ActionLink("Back to machine list", "Index")
         <h2>Machine: @Model.Name</h2>
+        <h4>Function: @Model.Function</h4>
         @Html.ActionLink("Update machine info", "Edit", new { id = Model.MachineId }) |
         @Html.ActionLink("Decommission machine", "Delete", new { id = Model.MachineId })
-        <h4>Function: @Model.Function</h4>
         <h4>@Model.Status</h4>
 
         @using (Html.BeginForm("UpdateStatus", "Machines"))

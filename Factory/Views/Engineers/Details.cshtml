@@ -1,48 +1,58 @@
 @using Factory.Models
 @model Factory.Models.Engineer
 
-<h2>Profile</h2>
-<h3>Engineer: @Model.Name</h3>
-<h4>@Model.Specialty</h4>
-<h4>Repair assignment: @Model.Assignment</h4>
+<div class=content>
+    <div class=details>
+        @Html.ActionLink("Back to engineer list", "Index")
+        <h2>Engineer: @Model.Name</h2>
+        <h4>Specialty: @Model.Specialty</h4>
+        @Html.ActionLink("Update engineer info", "Edit", new { id = Model.EngineerId }) |
+        @Html.ActionLink("Remove engineer", "Delete", new { id = Model.EngineerId }) |
+        <h4>Repair assignment: @Model.Assignment</h4>
 
-@if (@Model.JoinEntities.Count == 0)
-{
-    <p>@Model.Name has not been licensed to repair any machines.</p>
-}
-else
-{
-    @using (Html.BeginForm("Reassign", "Engineers"))
-    {
-        @Html.Hidden("id", @Model.EngineerId)
-
-        @Html.RadioButton("newAssign", "Unassigned", true, new { id = "unassign-radio" })
-        <label for="unassign-radio">Unassigned</label>
-
-        @foreach (EngineerMachine join in Model.JoinEntities)
+        @if (@Model.JoinEntities.Count == 0)
         {
-            @Html.RadioButton("newAssign", $"{join.Machine.Name}", new { id = $"{join.Machine.Name}-radio" })
-            <label for="@($"{join.Machine.Name}-radio")">@join.Machine.Name</label>
-
-            <input type="submit" value="Reassign" />
+            <p>@Model.Name has not been licensed to repair any machines.</p>
         }
-    }
-    <h3>Repair Licenses:</h3>
-    <ul>
-        @foreach (EngineerMachine join in Model.JoinEntities)
+        else
         {
-            <li>@join.Machine.Name</li>
-            @using (Html.BeginForm("DeleteJoin", "Engineers"))
+            @using (Html.BeginForm("Reassign", "Engineers"))
             {
-                @Html.Hidden("joinId", @join.EngineerMachineId)
-                @Html.Hidden("engId", @Model.EngineerId)
-                <input type="submit" value="Remove license" />
-            }
-        }
-    </ul>
-}
+                <div class=alt-form>
+                    @Html.Hidden("id", @Model.EngineerId)
 
-@Html.ActionLink("Add a repair license", "AddMachine", new { id = Model.EngineerId }) |
-@Html.ActionLink("Update engineer info", "Edit", new { id = Model.EngineerId }) |
-@Html.ActionLink("Remove engineer", "Delete", new { id = Model.EngineerId }) |
-@Html.ActionLink("Back to engineer list", "Index")
+                    <div class=radio-entry>
+                        @Html.RadioButton("newAssign", "Unassigned", true, new { id = "unassign-radio" })
+                        <label for="unassign-radio">Unassigned</label>
+                    </div>
+                    @foreach (EngineerMachine join in Model.JoinEntities)
+                    {
+                        <div class=radio-entry>
+                            @Html.RadioButton("newAssign", $"{join.Machine.Name}", new { id = $"{join.Machine.Name}-radio" })
+                            <label for="@($"{join.Machine.Name}-radio")">@join.Machine.Name</label>
+                        </div>
+                        <input class=form-button type="submit" value="Reassign" />
+                    }
+                </div>
+            }
+            <h3>Repair Licenses:</h3>
+            <ul>
+                @foreach (EngineerMachine join in Model.JoinEntities)
+                {
+                    <div class=mach-eng>
+                        <li>@join.Machine.Name |</li>
+                        @using (Html.BeginForm("DeleteJoin", "Engineers"))
+                        {
+                            @Html.Hidden("joinId", @join.EngineerMachineId)
+                            @Html.Hidden("engId", @Model.EngineerId)
+                            <input class=remove type="submit" value="Remove license" />
+                        }
+                    </div>
+                }
+            </ul>
+        }
+
+        @Html.ActionLink("Add a repair license", "AddMachine", new { id = Model.EngineerId }) |
+        @Html.ActionLink("Back to engineer list", "Index")
+    </div>
+</div>

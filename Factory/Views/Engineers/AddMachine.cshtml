@@ -1,24 +1,28 @@
 @model Factory.Models.Engineer
 
-<h2>Add a Repair License</h2>
+<div class=content>
+    <h2>Add a Repair License</h2>
 
-<h4>Engineer: @Model.Name</h4>
+    <h4>Engineer: @Model.Name</h4>
 
-@if (((SelectList)ViewBag.MachineId).Count() == 0)
-{
-    <p>No machines have been installed. Go to this @Html.ActionLink("this page", "Create", "Machines") to report machine installation.</p>
-}
-else
-{
-    @using (Html.BeginForm())
+    @if (((SelectList)ViewBag.MachineId).Count() == 0)
     {
-        @Html.HiddenFor(model => model.EngineerId)
-
-        @Html.Label("Select a machine")
-        @Html.DropDownList("MachineId")
-
-        <input class="button" type="submit" value="Add repair license" />
+        <p>No machines have been installed. Go to this @Html.ActionLink("this page", "Create", "Machines") to report machine installation.</p>
     }
-}
+    else
+    {
+        @using (Html.BeginForm())
+        {
+            <div class=form-layout>
+                @Html.HiddenFor(model => model.EngineerId)
 
-<p>@Html.ActionLink("Back to engineer list", "Index")</p>
+                @Html.Label("Select a machine")
+                @Html.DropDownList("MachineId")
+
+                <input class="form-button" type="submit" value="Add repair license" />
+            </div>
+        }
+    }
+
+    <p>@Html.ActionLink("Back to engineer list", "Index")</p>
+</div>

@@ -7,11 +7,7 @@
 }
 
 .button:hover {
-    padding: 5px;
-    color: #64BBBC;
-    text-decoration: none;
-    border: solid 2px #64BBBC;
-    border-radius: 6px;
+    color: #BF7B35;
 }
 
 a {
@@ -52,9 +48,6 @@ a img:hover {
     }
 }
 
-/* .page-title {
-    padding: 25px;
-} */
 
 .form-button {
     background-color: black;
@@ -73,7 +66,7 @@ a img:hover {
     flex-direction: column;
     width: 50%;
     padding: 20px;
-    border: solid 3px #64BBBC;
+    border: solid 3px #CBC9CB;
     border-radius: 10px;
 }
 
@@ -125,11 +118,55 @@ a img:hover {
 }
 
 .inspec-log {
-    border: solid 3px #64BBBC;
+    border: solid 3px #CBC9CB;
     border-radius: 10px;
     padding: 20px;
     width: 40%;
     float: right;
+}
+
+.delete {
+    margin: 10px;
+    background-color: black;
+    color: #64BBBC;
+    border: solid 2px #64BBBC;
+    border-radius: 6px;
+}
+
+.delete:hover {
+    color: #C1292E;
+    border: solid 2px #C1292E;
+}
+
+.nvm {
+    margin: 10px;
+    background-color: black;
+    color: #64BBBC;
+    border: solid 2px #64BBBC;
+    border-radius: 6px;
+}
+
+.nvm:hover {
+    color: #72B01D;
+    border: solid 2px #72B01D;
+}
+
+.eng-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.card {
+    margin: 5px;
+    background-color: black;
+    border: solid 3px #64BBBC;
+    border-radius: 10px;
+}
+
+.card:hover {
+    border: solid 3px #BF7B35;
 }
 
 .content {
@@ -139,5 +176,5 @@ a img:hover {
 body {
     background-color: black;
     font-family: 'Electrolize', sans-serif;
-    color: #64BBBC;
+    color: #CBC9CB;
 }

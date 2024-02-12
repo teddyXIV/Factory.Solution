@@ -1,25 +1,28 @@
 @model Factory.Models.Machine
 
+<div class=content>
+    <h2>Add a licensed engineer</h2>
 
-<h2>Add a licensed engineer</h2>
+    <h4>Machine: @Model.Name</h4>
 
-<h4>Machine: @Model.Name</h4>
-
-@if (((SelectList)ViewBag.EngineerId).Count() == 0)
-{
-    <p>No engineers have been hired. Go to this @Html.ActionLink("this page", "Create", "Engineers") to add an Engineer.</p>
-}
-else
-{
-    @using (Html.BeginForm())
+    @if (((SelectList)ViewBag.EngineerId).Count() == 0)
     {
-        @Html.HiddenFor(model => model.MachineId)
-
-        @Html.Label("Select an engineer")
-        @Html.DropDownList("EngineerId")
-
-        <input class="button" type="submit" value="Add engineer" />
+        <p>No engineers have been hired. Go to this @Html.ActionLink("this page", "Create", "Engineers") to add an Engineer.</p>
     }
-}
+    else
+    {
+        @using (Html.BeginForm())
+        {
+            <div class=form-layout>
+                @Html.HiddenFor(model => model.MachineId)
 
-<p>@Html.ActionLink("Back to machine list", "Index")</p>
+                @Html.Label("Select an engineer")
+                @Html.DropDownList("EngineerId")
+
+                <input class="form-button" type="submit" value="Add engineer" />
+            </div>
+        }
+    }
+
+    <p>@Html.ActionLink("Back to machine list", "Index")</p>
+</div>

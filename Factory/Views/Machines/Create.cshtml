@@ -1,18 +1,22 @@
 @model Factory.Models.Machine
 
-<h2>Add a new machine</h2>
+<div class=content>
+    <h2>Add a new machine</h2>
 
-<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
-<p>@Html.ValidationMessageFor(model => model.Function, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+    <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+    <p>@Html.ValidationMessageFor(model => model.Function, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Name)
-    @Html.TextBoxFor(model => model.Name)
-    @Html.LabelFor(model => model.Function)
-    @Html.TextBoxFor(model => model.Function)
+    @using (Html.BeginForm())
+    {
+        <div class=form-layout>
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name)
+            @Html.LabelFor(model => model.Function)
+            @Html.TextBoxFor(model => model.Function)
 
-    <input class="form-button" type="submit" value="Add machine" />
-}
+            <input class="form-button" type="submit" value="Add machine" />
+        </div>
+    }
 
-@Html.ActionLink("Show all machines", "Index")
+    @Html.ActionLink("Show all machines", "Index")
+</div>
