@@ -7,7 +7,7 @@
         <h2>Engineer: @Model.Name</h2>
         <h4>Specialty: @Model.Specialty</h4>
         @Html.ActionLink("Update engineer info", "Edit", new { id = Model.EngineerId }) |
-        @Html.ActionLink("Remove engineer", "Delete", new { id = Model.EngineerId }) |
+        @Html.ActionLink("Remove engineer", "Delete", new { id = Model.EngineerId })
         <h4>Repair assignment: @Model.Assignment</h4>
 
         @if (@Model.JoinEntities.Count == 0)
@@ -62,7 +62,7 @@
 
         @if (@Model.Accidents.Count == 0)
         {
-            <p>@Model.Name has had no safety incidents.</p>
+            <p>@Model.Name has had 0 safety incidents.</p>
         }
         else
         {
