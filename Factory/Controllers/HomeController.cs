@@ -15,11 +15,11 @@ public class HomeController : Controller
     [HttpGet("/")]
     public ActionResult Index()
     {
-        Engineer[] engs = _db.Engineers.ToArray();
-        Machine[] machs = _db.Machines.ToArray();
-        Inspection[] inspecs = _db.Inspections.ToArray();
-        Accident[] accs = _db.Accidents.ToArray();
-        Dictionary<string, object[]> model = new Dictionary<string, object[]>
+        int engs = _db.Engineers.ToArray().Length;
+        int machs = _db.Machines.ToArray().Length;
+        int inspecs = _db.Inspections.ToArray().Length;
+        int accs = _db.Accidents.ToArray().Length;
+        Dictionary<string, int> model = new()
         {
             { "engs", engs },
             { "machs", machs },
