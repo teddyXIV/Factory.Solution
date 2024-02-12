@@ -38,6 +38,7 @@ This application allows the user to manage the factory's engineers and machines 
 }
 ```
 * In the command line, run "dotnet restore" to download and install packages.
+* If needed, add `dotnet-ef` to your device by running "dotnet tool install --global dotnet-ef --version 6.0.0"
 * In the command line run "dotnet ef database update" to update your database.
 * In the command line, run the command "dotnet run" to compile and execute the application.
 * Optionally, you can run "dotnet build" to compile this application without running it.
