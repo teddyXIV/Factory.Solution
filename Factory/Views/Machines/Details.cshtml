@@ -42,10 +42,10 @@
                 {
                     <div class="mach-eng">
                         <li>@join.Engineer.Name |</li>
-                        @using (Html.BeginForm("DeleteJoin", "Engineers"))
+                        @using (Html.BeginForm("DeleteJoin", "Machines"))
                         {
                             @Html.Hidden("joinId", @join.EngineerMachineId)
-                            @Html.Hidden("engId", @Model.MachineId)
+                            @Html.Hidden("machId", @Model.MachineId)
 
                             <input class="remove" type="submit" value="Remove engineer" />
                         }
