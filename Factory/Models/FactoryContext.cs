@@ -1,4 +1,3 @@
-using Factory.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Factory.Models;
